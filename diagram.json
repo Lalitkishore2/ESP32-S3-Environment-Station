@@ -13,30 +13,28 @@
     {
       "type": "wokwi-st7735",
       "id": "tft",
-      "top": -260,
+      "top": -220,
       "left": 160,
-      "attrs": {
-        "volume": "1"
-      }
+      "attrs": {}
     },
     {
       "type": "wokwi-dht11",
       "id": "dht11",
-      "top": 240,
+      "top": 220,
       "left": -220,
       "attrs": {}
     },
     {
       "type": "wokwi-ds18b20",
       "id": "ds18b20",
-      "top": 240,
+      "top": 220,
       "left": -80,
       "attrs": {}
     },
     {
       "type": "wokwi-resistor",
       "id": "r_ds18b20",
-      "top": 160,
+      "top": 150,
       "left": -80,
       "attrs": {
         "value": "4700"
@@ -45,7 +43,7 @@
     {
       "type": "wokwi-led",
       "id": "led_green",
-      "top": 240,
+      "top": 220,
       "left": 100,
       "attrs": {
         "color": "green"
@@ -54,7 +52,7 @@
     {
       "type": "wokwi-resistor",
       "id": "r_green",
-      "top": 160,
+      "top": 150,
       "left": 100,
       "attrs": {
         "value": "220"
@@ -63,7 +61,7 @@
     {
       "type": "wokwi-led",
       "id": "led_white",
-      "top": 240,
+      "top": 220,
       "left": 180,
       "attrs": {
         "color": "white"
@@ -72,7 +70,7 @@
     {
       "type": "wokwi-resistor",
       "id": "r_white",
-      "top": 160,
+      "top": 150,
       "left": 180,
       "attrs": {
         "value": "220"
@@ -81,7 +79,7 @@
     {
       "type": "wokwi-buzzer",
       "id": "buzzer",
-      "top": 240,
+      "top": 220,
       "left": 260,
       "attrs": {
         "volume": "0.1"
@@ -92,11 +90,11 @@
     [ "esp32:3V3", "tft:VCC", "red", [ "h20", "v-60" ] ],
     [ "esp32:GND.1", "tft:GND", "black", [ "h10", "v-80" ] ],
     [ "esp32:10", "tft:CS", "purple", [ "h0" ] ],
-    [ "esp32:8", "tft:RESET", "gray", [ "h0" ] ],
-    [ "esp32:9", "tft:A0", "orange", [ "h0" ] ],
+    [ "esp32:8", "tft:RES", "gray", [ "h0" ] ],
+    [ "esp32:9", "tft:DC", "orange", [ "h0" ] ],
     [ "esp32:11", "tft:SDA", "blue", [ "h0" ] ],
     [ "esp32:12", "tft:SCK", "yellow", [ "h0" ] ],
-    [ "esp32:7", "tft:LED", "white", [ "h0" ] ],
+    [ "esp32:7", "tft:BLK", "white", [ "h0" ] ],
 
     [ "esp32:3V3", "dht11:VCC", "red", [ "h-40", "v120" ] ],
     [ "esp32:GND.1", "dht11:GND", "black", [ "h-60", "v140" ] ],
