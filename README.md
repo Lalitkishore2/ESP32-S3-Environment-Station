@@ -19,7 +19,88 @@ Production-grade C++17 PlatformIO firmware for an ESP32-S3 Environment Monitorin
 
 ---
 
-## Hardware Pin Connections
+## Visual Circuit & Wiring Diagram
+
+```mermaid
+graph TD
+    subgraph PowerSystem["Power Supply System"]
+        LM2596["LM2596 Step-Down DC-DC<br/>(12V DC -> 5V DC)"] -->|5V / VIN| ESP32
+    end
+
+    subgraph Controller["ESP32-S3 Microcontroller"]
+        ESP32["ESP32-S3 Dev Module"]
+    end
+
+    subgraph Display["1.8 inch ST7735 SPI TFT Display"]
+        ESP32 -- "GPIO 10 (CS)" --> TFT_CS["ST7735 CS"]
+        ESP32 -- "GPIO 8 (RST)" --> TFT_RST["ST7735 RESET"]
+        ESP32 -- "GPIO 9 (DC)" --> TFT_DC["ST7735 A0 / DC"]
+        ESP32 -- "GPIO 11 (MOSI)" --> TFT_MOSI["ST7735 SDA"]
+        ESP32 -- "GPIO 12 (SCK)" --> TFT_SCK["ST7735 SCK"]
+        ESP32 -- "GPIO 7 (PWM)" --> TFT_BL["ST7735 LED (Backlight)"]
+    end
+
+    subgraph Sensors["Environment Sensors"]
+        ESP32 -- "GPIO 4 (Digital)" --> DHT11["DHT11 Ambient Sensor"]
+        ESP32 -- "GPIO 5 (OneWire)" --> DS18B20["DS18B20 High-Temp Probe"]
+        PU["4.7kΩ Pull-Up Resistor"] -.->|3.3V Rail| DS18B20
+    end
+
+    subgraph Indicators["Safety Alerts & Indicators"]
+        ESP32 -- "GPIO 16" --> R1["220Ω Resistor"] --> G_LED["Green LED (System OK)"]
+        ESP32 -- "GPIO 17" --> R2["220Ω Resistor"] --> W_LED["White LED (Warning)"]
+        ESP32 -- "GPIO 18 (PWM)" --> BUZZER["Active Buzzer (Alert Tone)"]
+    end
+
+    classDef esp fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#fff;
+    classDef display fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff;
+    classDef sensor fill:#0f172a,stroke:#10b981,stroke-width:2px,color:#fff;
+    classDef alert fill:#0f172a,stroke:#f59e0b,stroke-width:2px,color:#fff;
+    class ESP32 esp;
+    class TFT_CS,TFT_RST,TFT_DC,TFT_MOSI,TFT_SCK,TFT_BL display;
+    class DHT11,DS18B20 sensor;
+    class G_LED,W_LED,BUZZER alert;
+```
+
+---
+
+## Complete Block Schematic
+
+```
+               +-------------------------------------------------------------+
+               |                    LM2596 STEP-DOWN DC-DC                   |
+               |                     12V DC  ===>  5V DC                     |
+               +------------------------------+------------------------------+
+                                              | 5V / VIN
+                                              v
++---------------------------------------------------------------------------------------------------+
+|                                     ESP32-S3 DEV MODULE                                           |
+|                                                                                                   |
+|  [GPIO 10] -- (SPI CS)    -----> ST7735 TFT [CS]                                                  |
+|  [GPIO 8]  -- (SPI RESET)  -----> ST7735 TFT [RESET]                                               |
+|  [GPIO 9]  -- (Data/Cmd)   -----> ST7735 TFT [A0 / DC]                                              |
+|  [GPIO 11] -- (SPI MOSI)   -----> ST7735 TFT [SDA]                                                  |
+|  [GPIO 12] -- (SPI SCK)    -----> ST7735 TFT [SCK]                                                  |
+|  [GPIO 7]  -- (Backlight)  -----> ST7735 TFT [LED]                                                  |
+|                                                                                                   |
+|  [GPIO 4]  -- (Digital)    -----> DHT11 Sensor [DATA]                                             |
+|                                                                                                   |
+|  [GPIO 5]  -- (OneWire)    -----> DS18B20 Probe [DATA] <---+                                       |
+|                                                              | (4.7kΩ Pull-Up)                    |
+|                                                            [3.3V]                                 |
+|                                                                                                   |
+|  [GPIO 16] -- (Status LED) -----> [220Ω] -----> (Anode) GREEN LED (Cathode) -----> [GND]           |
+|  [GPIO 17] -- (Alert LED)  -----> [220Ω] -----> (Anode) WHITE LED (Cathode) -----> [GND]           |
+|  [GPIO 18] -- (PWM Tone)   -----> (+) ACTIVE BUZZER (-) -----------------------> [GND]           |
+|                                                                                                   |
+|  [3.3V]    -------------------------------------------------------------------> Common VCC Rail   |
+|  [GND]     -------------------------------------------------------------------> Common GND Rail   |
++---------------------------------------------------------------------------------------------------+
+```
+
+---
+
+## Hardware Pin Reference Table
 
 | Component | Module Pin | ESP32-S3 GPIO | Notes |
 | :--- | :--- | :--- | :--- |
@@ -50,7 +131,7 @@ Production-grade C++17 PlatformIO firmware for an ESP32-S3 Environment Monitorin
 
 ## Wokwi Simulation Diagram & Breadboard Design
 
-The project includes a complete breadboard layout simulation defined in `diagram.json`:
+The project includes an interactive breadboard simulation defined in `diagram.json`:
 
 - **Interactive Breadboard**: `wokwi-breadboard` layout with ESP32-S3 snapped into terminal rails.
 - **Display Module**: `wokwi-ili9341` / `board-st7735` SPI connection.
