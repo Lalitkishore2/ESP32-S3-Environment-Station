@@ -190,17 +190,17 @@ void DisplayManager::renderDashboard(const char* timeStr, const char* dateStr, b
         canvas_.print("Syncing Weather...");
     }
 
-    // 4. Bottom Footer: Clean IP Address Bar (143 - 160px)
+    // 4. Bottom Footer: Clean Date & Station Status (143 - 160px) - IP Removed as requested
     canvas_.fillRect(0, 143, 128, 17, 0x0000); // Black Footer
     canvas_.setTextColor(0x3660); // Bright Mint Green
     canvas_.setTextSize(1);
-    if (wifiConnected && ipStr && strlen(ipStr) > 0) {
-        snprintf(buf, sizeof(buf), "IP: %s", ipStr);
+    if (dateStr && strlen(dateStr) > 0) {
+        snprintf(buf, sizeof(buf), "%s", dateStr);
         canvas_.setCursor(4, 147);
         canvas_.print(buf);
     } else {
         canvas_.setCursor(4, 147);
-        canvas_.print("IP: Connecting...");
+        canvas_.print("Station Active");
     }
 
     // Flush frame buffer to physical SPI display (flicker-free)
