@@ -48,6 +48,22 @@ Production-grade C++17 PlatformIO firmware for an ESP32-S3 Environment Monitorin
 
 ---
 
+## Wokwi Simulation Diagram & Breadboard Design
+
+The project includes a complete breadboard layout simulation defined in `diagram.json`:
+
+- **Interactive Breadboard**: `wokwi-breadboard` layout with ESP32-S3 snapped into terminal rails.
+- **Display Module**: `wokwi-ili9341` / `board-st7735` SPI connection.
+- **Sensor Array**: `wokwi-dht11` / `wokwi-dht22` ambient sensor and `wokwi-ds18b20` OneWire temperature probe with pull-up resistor network.
+- **Indicators & Alerts**: Dual LED status indicators (`wokwi-led` green & white) with current-limiting resistors and an active PWM audio buzzer (`wokwi-buzzer`).
+
+### How to Run Simulation
+1. Install the **Wokwi Simulator** extension in VS Code.
+2. Open `diagram.json` in VS Code.
+3. Press `F5` or click **Start Simulation** in the Wokwi panel.
+
+---
+
 ## System Architecture & Software Layers
 
 The firmware uses a strict layered software architecture:
