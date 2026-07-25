@@ -77,21 +77,21 @@ graph TD
 |                                     ESP32-S3 DEV MODULE                                           |
 |                                                                                                   |
 |  [GPIO 10] -- (SPI CS)    -----> ST7735 TFT [CS]                                                  |
-|  [GPIO 8]  -- (SPI RESET)  -----> ST7735 TFT [RESET]                                               |
-|  [GPIO 9]  -- (Data/Cmd)   -----> ST7735 TFT [A0 / DC]                                              |
-|  [GPIO 11] -- (SPI MOSI)   -----> ST7735 TFT [SDA]                                                  |
-|  [GPIO 12] -- (SPI SCK)    -----> ST7735 TFT [SCK]                                                  |
-|  [GPIO 7]  -- (Backlight)  -----> ST7735 TFT [LED]                                                  |
+|  [GPIO 8]  -- (SPI RESET)  -----> ST7735 TFT [RESET]                                              |
+|  [GPIO 9]  -- (Data/Cmd)   -----> ST7735 TFT [A0 / DC]                                            |
+|  [GPIO 11] -- (SPI MOSI)   -----> ST7735 TFT [SDA]                                                |
+|  [GPIO 12] -- (SPI SCK)    -----> ST7735 TFT [SCK]                                                |
+|  [GPIO 7]  -- (Backlight)  -----> ST7735 TFT [LED]                                                |
 |                                                                                                   |
 |  [GPIO 4]  -- (Digital)    -----> DHT11 Sensor [DATA]                                             |
 |                                                                                                   |
-|  [GPIO 5]  -- (OneWire)    -----> DS18B20 Probe [DATA] <---+                                       |
+|  [GPIO 5]  -- (OneWire)    -----> DS18B20 Probe [DATA] <---+                                      |
 |                                                              | (4.7kΩ Pull-Up)                    |
 |                                                            [3.3V]                                 |
 |                                                                                                   |
-|  [GPIO 16] -- (Status LED) -----> [220Ω] -----> (Anode) GREEN LED (Cathode) -----> [GND]           |
-|  [GPIO 17] -- (Alert LED)  -----> [220Ω] -----> (Anode) WHITE LED (Cathode) -----> [GND]           |
-|  [GPIO 18] -- (PWM Tone)   -----> (+) ACTIVE BUZZER (-) -----------------------> [GND]           |
+|  [GPIO 16] -- (Status LED) -----> [220Ω] -----> (Anode) GREEN LED (Cathode) -----> [GND]          |
+|  [GPIO 17] -- (Alert LED)  -----> [220Ω] -----> (Anode) WHITE LED (Cathode) -----> [GND]          |
+|  [GPIO 18] -- (PWM Tone)   -----> (+) ACTIVE BUZZER (-) -----------------------> [GND]            |
 |                                                                                                   |
 |  [3.3V]    -------------------------------------------------------------------> Common VCC Rail   |
 |  [GND]     -------------------------------------------------------------------> Common GND Rail   |
