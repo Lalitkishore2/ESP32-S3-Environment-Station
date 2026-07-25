@@ -8,7 +8,11 @@ namespace config {
 // WiFi Configuration
 constexpr const char* DEFAULT_WIFI_SSID = "POCO";
 constexpr const char* DEFAULT_WIFI_PASS = "lalitkishore27";
+constexpr const char* MDNS_HOSTNAME     = "envstation"; // Access via http://envstation.local
 constexpr uint32_t    WIFI_RECONNECT_INTERVAL_MS = 15000; // 15 seconds
+
+// Web Server Configuration
+constexpr uint16_t    WEB_SERVER_PORT = 80;
 
 // NTP Configuration
 constexpr const char* NTP_SERVER_1 = "pool.ntp.org";
@@ -30,14 +34,13 @@ constexpr float       HIGH_HUMIDITY_ALERT = 85.0f;
 constexpr float       LOW_HUMIDITY_ALERT  = 20.0f;
 
 // Display Options
-constexpr uint32_t    DISPLAY_REFRESH_INTERVAL_MS = 1000; // 1 second tick
-constexpr uint8_t     DEFAULT_BRIGHTNESS = 255;
+constexpr uint32_t DISPLAY_REFRESH_INTERVAL_MS = 1000; // 1 second tick
+constexpr uint8_t DEFAULT_BRIGHTNESS = 255;
 
 // Buzzer PWM Settings
-constexpr uint32_t    ALERT_TONE_FREQ_HZ = 2000;
-
-// Web Server Settings
-constexpr uint16_t    WEB_SERVER_PORT = 80;
+constexpr uint32_t BUZZER_LEDC_CHANNEL = 0;
+constexpr uint32_t BUZZER_LEDC_RES_BITS = 8;
+constexpr uint32_t ALERT_TONE_FREQ_HZ = 2000;
 
 } // namespace config
 

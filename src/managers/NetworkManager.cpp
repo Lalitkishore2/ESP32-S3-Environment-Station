@@ -1,6 +1,7 @@
 #include "managers/NetworkManager.hpp"
 #include "config/Config.hpp"
 #include "utils/Logger.hpp"
+#include <ESPmDNS.h>
 
 namespace managers {
 
@@ -25,6 +26,14 @@ void NetworkManager::update() {
         if (state_ != NetworkState::CONNECTED) {
             state_ = NetworkState::CONNECTED;
             utils::Logger::info("WiFi", "Connected! IP Address: %s", WiFi.localIP().toString().c_str());
+
+            // Start mDNS Responder (envstation.local)
+            if (MDNS.begin(config::MDNS_HOSTNAME)) {
+                MDNS.addService("http", "tcp", 80);
+                utils::Logger::info("mDNS", "mDNS responder started: http://%s.local", config::MDNS_HOSTNAME);
+            } else {
+                utils::Logger::warn("mDNS", "Failed to start mDNS responder!");
+            }
         }
         return;
     }
@@ -57,6 +66,13 @@ NetworkState NetworkManager::getState() const {
 
 bool NetworkManager::isConnected() const {
     return state_ == NetworkState::CONNECTED;
+}
+
+String NetworkManager::getIPAddress() const {
+    if (isConnected()) {
+        return WiFi.localIP().toString();
+    }
+    return String("0.0.0.0");
 }
 
 } // namespace managers

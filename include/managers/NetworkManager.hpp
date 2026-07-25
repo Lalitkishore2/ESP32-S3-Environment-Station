@@ -20,6 +20,7 @@ public:
     
     [[nodiscard]] NetworkState getState() const;
     [[nodiscard]] bool isConnected() const;
+    [[nodiscard]] String getIPAddress() const;
 
 private:
     const char* ssid_;

@@ -190,17 +190,14 @@ void DisplayManager::renderDashboard(const char* timeStr, const char* dateStr, b
         canvas_.print("Syncing Weather...");
     }
 
-    // 4. Bottom Footer: Clean Date & Station Status (143 - 160px) - IP Removed as requested
+    // 4. Bottom Footer: Display envstation.local domain URL
     canvas_.fillRect(0, 143, 128, 17, 0x0000); // Black Footer
     canvas_.setTextColor(0x3660); // Bright Mint Green
     canvas_.setTextSize(1);
-    if (dateStr && strlen(dateStr) > 0) {
-        snprintf(buf, sizeof(buf), "%s", dateStr);
-        canvas_.setCursor(4, 147);
-        canvas_.print(buf);
+    if (wifiConnected) {
+        drawCentered("envstation.local", 147, 1, 0x3660);
     } else {
-        canvas_.setCursor(4, 147);
-        canvas_.print("Station Active");
+        drawCentered("Connecting...", 147, 1, 0xC618);
     }
 
     // Flush frame buffer to physical SPI display (flicker-free)
